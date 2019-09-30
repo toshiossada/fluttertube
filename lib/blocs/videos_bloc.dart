@@ -7,11 +7,11 @@ import 'package:fluttertube/models/video.dart';
 class VideosBloc extends BlocBase {
   Api api;
   List<Video> videos;
-  final _videosController = StreamController();
+  final _videosController = StreamController<List<Video>>();
 
   Stream get outVideos => _videosController.stream;
 
-  final _searchController = StreamController();
+  final _searchController = StreamController<String>();
   Sink get inSearch => _searchController.sink;
 
   VideosBloc() {
@@ -22,6 +22,7 @@ class VideosBloc extends BlocBase {
 
   void _search(String search) async {
     videos = await api.search(search);
+    _videosController.sink.add(videos);
   }
 
   @override
