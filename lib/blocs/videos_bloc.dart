@@ -4,7 +4,7 @@ import 'package:bloc_pattern/bloc_pattern.dart';
 import 'package:fluttertube/api.dart';
 import 'package:fluttertube/models/video.dart';
 
-class VideosBloc extends BlocBase {
+class VideosBloc implements BlocBase {
   Api api;
   List<Video> videos;
   final _videosController = StreamController<List<Video>>();
@@ -34,5 +34,23 @@ class VideosBloc extends BlocBase {
   void dispose() {
     _videosController.close();
     _searchController.close();
+  }
+
+  @override
+  void addListener(listener) {
+  }
+
+  @override
+  // TODO: implement hasListeners
+  bool get hasListeners => _searchController.hasListener;
+
+  @override
+  void notifyListeners() {
+    // TODO: implement notifyListeners
+  }
+
+  @override
+  void removeListener(listener) {
+    // TODO: implement removeListener
   }
 }
